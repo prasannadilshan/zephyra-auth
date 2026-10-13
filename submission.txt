@@ -11,6 +11,7 @@ Branches Used:
   - main (Production Ready)
   - feature/backend-auth (Spring Boot, Spring Security, JWT, PostgreSQL, Tests)
   - feature/frontend-auth (Next.js 16, TypeScript, Tailwind CSS, Auth Interceptors)
+  - feature/user-profile-editing (Profile & user management, editing controls, RBAC validation)
 
 2. DEPLOYED FRONTEND URL (Vercel):
 --------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ The database is pre-seeded on startup with the following test credentials:
     Email:       admin@zephyra.com
     Password:    Admin@123456
     Permissions: Access to User Profile, User Endpoints (/api/user/**),
-                 Admin Portal (/api/admin/users, /api/admin/stats)
+                 Admin Portal (/api/admin/users, /api/admin/stats, /api/admin/users/{id})
 
 [B] Standard User Account:
     Role:        ROLE_USER
@@ -47,8 +48,9 @@ The database is pre-seeded on startup with the following test credentials:
                  /api/user/status). Restricted from Admin Portal (403 Forbidden).
 
 [C] Self-Registration:
-    New accounts can also be created via the web interface (/register) or via:
-    POST /api/auth/register with desired roles (ROLE_USER, ROLE_ADMIN).
+    New accounts can be created via the web interface (/register) or via:
+    POST /api/auth/register. Public registration assigns standard user privileges
+    (ROLE_USER) exclusively to prevent privilege escalation.
 
 6. TECHNICAL ARCHITECTURE SUMMARY:
 --------------------------------------------------------------------------------
@@ -60,16 +62,18 @@ The database is pre-seeded on startup with the following test credentials:
   * Database: PostgreSQL (Render Managed PostgreSQL instance: zephyra_auth_db)
   * Dialect & ORM: Spring Data JPA, Hibernate 7
   * Containerization: Multi-stage Dockerfile (eclipse-temurin:21) with dynamic $PORT
-  * Tests: 19 automated tests (Unit & MockMvc Integration tests, 100% passing)
+  * Tests: 20 automated tests (Unit & MockMvc Integration tests, 100% passing)
 
 - Frontend Architecture:
   * Runtime: Next.js 16.4.0 (Turbopack), React 19, TypeScript
-  * Styling: Tailwind CSS 4 with custom dark/light theme tokens and glassmorphism
+  * Styling: Tailwind CSS 4 with custom light corporate theme (Blue/Slate)
   * Session Management: AuthContext with localStorage persistence
   * Token Interceptor: Axios-like resilient fetch client that automatically detects
     HTTP 401, issues a POST /api/auth/refresh-token request, rotates tokens,
     and replays pending requests seamlessly
-  * Quick-Fill Helpers: Login page includes 1-click test credential population buttons
+  * Profile & User Management: Standard users can edit their profile details directly
+    in the dashboard; administrators can edit usernames, emails, account active/disabled
+    status, and assigned roles in the admin portal.
 
 ================================================================================
 Submitted by: Prasanna Dilshan

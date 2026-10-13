@@ -16,7 +16,6 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isAdminRole, setIsAdminRole] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -37,16 +36,11 @@ export default function RegisterPage() {
 
     setSubmitting(true);
     try {
-      const roles = ["user"];
-      if (isAdminRole) {
-        roles.push("admin");
-      }
-
       await register({
         username: username.trim(),
         email: email.trim(),
         password,
-        roles,
+        roles: ["user"],
       });
 
       showToast("Account created successfully! Please sign in with your credentials.", "success");
@@ -168,25 +162,6 @@ export default function RegisterPage() {
                   placeholder="Re-enter password"
                   className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder:text-slate-400 text-slate-900"
                 />
-              </div>
-            </div>
-
-            {/* Role Selection */}
-            <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 block">
-                Account Role
-              </span>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="role_admin"
-                  checked={isAdminRole}
-                  onChange={(e) => setIsAdminRole(e.target.checked)}
-                  className="rounded text-blue-600 focus:ring-blue-500 cursor-pointer"
-                />
-                <label htmlFor="role_admin" className="text-xs text-slate-700 cursor-pointer font-medium">
-                  Administrator Privileges
-                </label>
               </div>
             </div>
 

@@ -41,6 +41,18 @@ export interface AdminDashboardData {
   recentUsers: User[];
 }
 
+export interface UpdateProfileRequest {
+  username: string;
+  email: string;
+}
+
+export interface UpdateUserAdminRequest {
+  username: string;
+  email: string;
+  enabled?: boolean;
+  roles?: string[];
+}
+
 export interface ApiError {
   status?: number;
   error?: string;

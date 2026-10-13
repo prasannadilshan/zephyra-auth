@@ -47,16 +47,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleQuickFill = (type: "admin" | "user") => {
-    if (type === "admin") {
-      setUsernameOrEmail("admin@zephyra.com");
-      setPassword("Admin@123456");
-    } else {
-      setUsernameOrEmail("user@zephyra.com");
-      setPassword("User@123456");
-    }
-    setErrorMessage(null);
-  };
 
   return (
     <div className="flex-1 flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
@@ -97,7 +87,7 @@ export default function LoginPage() {
                   required
                   value={usernameOrEmail}
                   onChange={(e) => setUsernameOrEmail(e.target.value)}
-                  placeholder="admin@zephyra.com or username"
+                  placeholder="Enter your username or email"
                   className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder:text-slate-400 text-slate-900"
                 />
               </div>
@@ -147,27 +137,6 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
-          {/* Quick Demo Helper */}
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Demo accounts:</span>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => handleQuickFill("admin")}
-                className="px-3 py-1 rounded-full border border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium text-[11px]"
-              >
-                Admin Demo
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickFill("user")}
-                className="px-3 py-1 rounded-full border border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium text-[11px]"
-              >
-                User Demo
-              </button>
-            </div>
-          </div>
 
           <div className="pt-2 text-center">
             <p className="text-xs text-slate-500">

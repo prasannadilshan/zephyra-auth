@@ -1,17 +1,17 @@
 package com.zephyra.auth.controller;
 
+import com.zephyra.auth.dto.request.UpdateUserAdminRequest;
 import com.zephyra.auth.dto.response.AdminDashboardResponse;
 import com.zephyra.auth.dto.response.UserProfileResponse;
 import com.zephyra.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +30,16 @@ public class AdminController {
     public ResponseEntity<List<UserProfileResponse>> getAllUsers() {
         List<UserProfileResponse> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/users/{id}")
+    @Operation(summary = "Update user by admin", description = "Allows administrator to update user details and roles (ADMIN only)")
+    public ResponseEntity<UserProfileResponse> updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateUserAdminRequest request
+    ) {
+        UserProfileResponse updated = userService.updateUserByAdmin(id, request);
+        return ResponseEntity.ok(updated);
     }
 
     @GetMapping("/dashboard")
