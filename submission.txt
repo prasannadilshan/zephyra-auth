@@ -12,6 +12,7 @@ Branches Used:
   - feature/backend-auth (Spring Boot, Spring Security, JWT, PostgreSQL, Tests)
   - feature/frontend-auth (Next.js 16, TypeScript, Tailwind CSS, Auth Interceptors)
   - feature/user-profile-editing (Profile & user management, editing controls, RBAC validation)
+  - feature/remove-gradients (Design refinement removing AI-style gradients in favor of solid colors)
 
 2. DEPLOYED FRONTEND URL (Vercel):
 --------------------------------------------------------------------------------
