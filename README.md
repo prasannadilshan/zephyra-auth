@@ -8,7 +8,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Tests Passing](https://img.shields.io/badge/Tests-19%2F19_Passed-brightgreen)](https://github.com/prasannadilshan/zephyra-auth)
 
-Production-grade, full-stack authentication and authorization system developed for the **ZephyraTech Solutions (Pvt) Ltd Software Engineering Assessment**. 
+Production-grade, full-stack authentication and authorization system powered by Spring Boot and Next.js. 
 
 ---
 
@@ -25,8 +25,8 @@ Production-grade, full-stack authentication and authorization system developed f
   - Axios-like fetch client with queueing and retry on HTTP 401.
   - Seamless background token rotation without interrupting user workflow.
 - **🎨 Modern Responsive UI**:
-  - Built with Next.js 16 App Router, React 19, and Tailwind CSS 4.
-  - Dark/Light aesthetic, live token inspector, interactive endpoint tester, and 1-click test credential quick-fill.
+  - Built with Next.js 16 App Router, React 19, and Tailwind CSS.
+  - Clean, accessible design with rounded controls, live profile editing, token lifecycle inspector, and dedicated admin user management.
 - **📖 OpenAPI 3 / Swagger UI Documentation**:
   - Interactive API documentation hosted at `/swagger-ui.html`.
 - **🧪 Comprehensive Test Suite**:
@@ -67,22 +67,20 @@ Production-grade, full-stack authentication and authorization system developed f
 
 ---
 
-## 🔑 Test Credentials (Pre-Seeded)
+## 🔑 Test Accounts (Pre-Seeded)
 
-The system automatically initializes roles and safe test accounts on startup:
+The system automatically initializes roles and test accounts on startup:
 
 | Account Type | Email | Password | Assigned Role | Accessible Portals |
 |---|---|---|---|---|
 | **Administrator** | `admin@zephyra.com` | `Admin@123456` | `ROLE_ADMIN` | Dashboard, Admin Portal, All APIs |
 | **Standard User** | `user@zephyra.com` | `User@123456` | `ROLE_USER` | Dashboard, User APIs (Admin forbidden) |
 
-> 💡 *You can also click the **"Quick-Fill Admin"** or **"Quick-Fill User"** buttons directly on the Login page.*
-
 ---
 
 ## 📡 API Endpoints
 
-Full API documentation with cURL commands and schemas is available in [backend/API_DOCUMENTATION.md](file:///d:/Year04/Projects/zephyra-auth/backend/API_DOCUMENTATION.md) and interactive Swagger UI.
+Full API documentation with cURL commands and schemas is available in [backend/API_DOCUMENTATION.md](backend/API_DOCUMENTATION.md) and interactive Swagger UI.
 
 ### Public Endpoints
 | Method | Endpoint | Description |
@@ -96,6 +94,7 @@ Full API documentation with cURL commands and schemas is available in [backend/A
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/user/profile` | Retrieve authenticated user profile |
+| `PUT` | `/api/user/profile` | Update user profile information |
 | `GET` | `/api/user/status` | Current user session status |
 | `POST` | `/api/auth/logout` | Revoke active refresh token |
 
@@ -103,6 +102,8 @@ Full API documentation with cURL commands and schemas is available in [backend/A
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/admin/users` | List all registered users with roles |
+| `PUT` | `/api/admin/users/{id}` | Edit user details and roles |
+| `DELETE` | `/api/admin/users/{id}` | Delete user account |
 | `GET` | `/api/admin/stats` | System statistics (total users, active sessions) |
 
 ---
@@ -162,20 +163,8 @@ Compiles with Turbopack and verifies all TypeScript types and static routes.
 
 ## 🚀 Cloud Deployment
 
-See the comprehensive [DEPLOYMENT_GUIDE.md](file:///d:/Year04/Projects/zephyra-auth/DEPLOYMENT_GUIDE.md) for step-by-step instructions:
+See the comprehensive [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for step-by-step instructions:
 - **Render.com**: Backend Web Service with Docker + Render Managed PostgreSQL
 - **Vercel**: Next.js App Router deployment
 - **Environment variables reference & troubleshooting**
 
----
-
-## 📄 Submission File
-
-The official submission artifact required for the assessment is located at:
-👉 [submission.txt](file:///d:/Year04/Projects/zephyra-auth/submission.txt)
-
----
-
-## 👤 Author
-- **Prasannna Dilshan**
-- GitHub: [@prasannadilshan](https://github.com/prasannadilshan)
