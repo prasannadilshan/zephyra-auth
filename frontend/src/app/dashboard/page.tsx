@@ -90,7 +90,7 @@ export default function UserDashboardPage() {
           {/* Header Info */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center text-2xl font-bold uppercase shadow-md shadow-indigo-500/20">
+              <div className="w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl font-bold uppercase shadow-xs">
                 {user?.username?.charAt(0) || "U"}
               </div>
               <div>
@@ -118,7 +118,7 @@ export default function UserDashboardPage() {
             <div className="flex items-center gap-3">
               <button
                 onClick={openEditModal}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all shadow-sm shadow-blue-500/20"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-xs"
               >
                 <Pencil className="w-4 h-4" />
                 <span>Edit Details</span>
@@ -127,7 +127,7 @@ export default function UserDashboardPage() {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-sm font-semibold transition-all shadow-sm shadow-purple-500/20"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors shadow-xs"
                 >
                   <Users className="w-4 h-4" />
                   <span>Admin Portal</span>

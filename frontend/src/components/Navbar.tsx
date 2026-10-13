@@ -21,7 +21,7 @@ export function Navbar() {
           {/* Brand Logo */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/30 group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:bg-blue-700 transition-colors">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <span className="font-bold text-lg text-slate-900 tracking-tight">
@@ -82,7 +82,7 @@ export function Navbar() {
             {isAuthenticated ? (
               <div className="hidden sm:flex items-center gap-3">
                 <div className="flex items-center gap-2 pl-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center text-xs font-semibold uppercase shadow-xs">
+                  <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold uppercase shadow-xs">
                     {user?.username?.charAt(0) || "U"}
                   </div>
                   <div className="flex flex-col text-left">
@@ -117,7 +117,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-full shadow-sm shadow-blue-500/25 transition-all"
+                  className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-xs transition-colors"
                 >
                   Register
                 </Link>

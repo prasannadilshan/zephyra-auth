@@ -58,7 +58,7 @@ export default function RegisterPage() {
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex p-3 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/25 mb-2">
+          <div className="inline-flex p-3 rounded-2xl bg-blue-600 text-white shadow-xs mb-2">
             <ShieldCheck className="w-8 h-8" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
@@ -180,7 +180,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-2.5 px-4 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 transition-all shadow-md shadow-indigo-500/25 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+              className="w-full py-2.5 px-4 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
             >
               {submitting ? (
                 <>
