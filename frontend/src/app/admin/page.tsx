@@ -170,43 +170,43 @@ export default function AdminPortalPage() {
 
         {/* 3 Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+          <div className="p-6 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-blue-600 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shadow-xs">
               <Users className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+              <span className="text-xs font-bold text-blue-800 uppercase tracking-wider block">
                 Total Users
               </span>
-              <span className="text-2xl font-bold text-slate-900">
+              <span className="text-2xl font-extrabold text-slate-900">
                 {stats?.totalUsers ?? (loading ? "..." : 0)}
               </span>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+          <div className="p-6 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-purple-600 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shadow-xs">
               <Shield className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+              <span className="text-xs font-bold text-purple-800 uppercase tracking-wider block">
                 Administrators
               </span>
-              <span className="text-2xl font-bold text-slate-900">
+              <span className="text-2xl font-extrabold text-slate-900">
                 {stats?.totalAdmins ?? (loading ? "..." : 0)}
               </span>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+          <div className="p-6 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-emerald-600 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-xs">
               <Activity className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+              <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">
                 Active Sessions
               </span>
-              <span className="text-2xl font-bold text-slate-900">
+              <span className="text-2xl font-extrabold text-slate-900">
                 {stats?.activeRefreshTokens ?? (loading ? "..." : 0)}
               </span>
             </div>
@@ -268,7 +268,11 @@ export default function AdminPortalPage() {
                     return (
                       <tr key={u.id} className="hover:bg-slate-50 transition-colors">
                         <td className="py-4 px-6 font-semibold text-slate-900 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold uppercase">
+                          <div className={`w-8 h-8 rounded-full text-white flex items-center justify-center text-xs font-semibold uppercase shadow-xs ${
+                            hasAdmin
+                              ? "bg-gradient-to-tr from-purple-600 to-indigo-600"
+                              : "bg-gradient-to-tr from-blue-600 to-cyan-600"
+                          }`}>
                             {u.username.charAt(0)}
                           </div>
                           <div>
@@ -284,8 +288,8 @@ export default function AdminPortalPage() {
                                 key={r}
                                 className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${
                                   r === "ROLE_ADMIN"
-                                    ? "bg-blue-50 text-blue-700 border-blue-200"
-                                    : "bg-slate-50 text-slate-700 border-slate-200"
+                                    ? "bg-purple-50 text-purple-700 border-purple-200"
+                                    : "bg-blue-50 text-blue-700 border-blue-200"
                                 }`}
                               >
                                 {r.replace("ROLE_", "")}
@@ -296,7 +300,7 @@ export default function AdminPortalPage() {
                         <td className="py-4 px-6">
                           {u.enabled ? (
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Active
                             </span>
                           ) : (
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">
@@ -310,7 +314,7 @@ export default function AdminPortalPage() {
                         <td className="py-4 px-6 text-right">
                           <button
                             onClick={() => openEditModal(u)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-semibold text-slate-700 hover:text-blue-600 hover:border-blue-300 hover:bg-blue-50 transition-colors shadow-2xs"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-200 text-xs font-semibold text-blue-700 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-colors shadow-2xs"
                           >
                             <Pencil className="w-3.5 h-3.5" />
                             <span>Edit</span>

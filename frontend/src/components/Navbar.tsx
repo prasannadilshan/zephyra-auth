@@ -20,12 +20,12 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
           <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/30 group-hover:scale-105 transition-transform">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <span className="font-bold text-lg text-slate-900 tracking-tight">
-                Zephyra
+                Zephyra<span className="text-blue-600">Auth</span>
               </span>
             </Link>
 
@@ -52,7 +52,7 @@ export function Navbar() {
                         : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                     }`}
                   >
-                    <LayoutDashboard className="w-4 h-4" />
+                    <LayoutDashboard className="w-4 h-4 text-blue-500" />
                     Dashboard
                   </Link>
 
@@ -61,11 +61,11 @@ export function Navbar() {
                       href="/admin"
                       className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium transition-colors ${
                         isActive("/admin")
-                          ? "bg-blue-50 text-blue-700 font-semibold"
-                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                          ? "bg-purple-50 text-purple-700 font-semibold border border-purple-200"
+                          : "text-slate-600 hover:text-purple-700 hover:bg-purple-50"
                       }`}
                     >
-                      <Users className="w-4 h-4" />
+                      <Users className="w-4 h-4 text-purple-500" />
                       Admin
                     </Link>
                   )}
@@ -82,15 +82,19 @@ export function Navbar() {
             {isAuthenticated ? (
               <div className="hidden sm:flex items-center gap-3">
                 <div className="flex items-center gap-2 pl-2">
-                  <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold uppercase">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center text-xs font-semibold uppercase shadow-xs">
                     {user?.username?.charAt(0) || "U"}
                   </div>
                   <div className="flex flex-col text-left">
                     <span className="text-sm font-semibold text-slate-800 leading-tight">
                       {user?.username}
                     </span>
-                    <span className="text-[11px] text-slate-500 font-medium leading-tight">
-                      {isAdmin ? "Admin" : "User"}
+                    <span className="text-[11px] leading-tight">
+                      {isAdmin ? (
+                        <span className="text-purple-600 font-semibold">Admin</span>
+                      ) : (
+                        <span className="text-sky-600 font-medium">Standard User</span>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -107,13 +111,13 @@ export function Navbar() {
               <div className="hidden sm:flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-xs transition-colors"
+                  className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-full shadow-sm shadow-blue-500/25 transition-all"
                 >
                   Register
                 </Link>
