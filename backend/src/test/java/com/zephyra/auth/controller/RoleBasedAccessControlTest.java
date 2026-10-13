@@ -22,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
+@org.springframework.transaction.annotation.Transactional
 class RoleBasedAccessControlTest {
 
     @Autowired
@@ -96,5 +97,22 @@ class RoleBasedAccessControlTest {
         mockMvc.perform(get("/api/admin/users")
                         .header("Authorization", "Bearer " + adminToken))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void testUpdateUserProfileWithUserTokenReturnsSuccess() throws Exception {
+        com.zephyra.auth.dto.request.UpdateProfileRequest updateRequest =
+                com.zephyra.auth.dto.request.UpdateProfileRequest.builder()
+                        .username("user")
+                        .email("updated_user@zephyra.com")
+                        .build();
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/user/profile")
+                        .header("Authorization", "Bearer " + userToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username", is("user")))
+                .andExpect(jsonPath("$.email", is("updated_user@zephyra.com")));
     }
 }

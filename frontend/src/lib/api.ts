@@ -177,11 +177,21 @@ export const authApi = {
 
 export const userApi = {
   getProfile: (): Promise<User> => api.fetch<User>("/user/profile"),
+  updateProfile: (data: { username: string; email: string }): Promise<User> =>
+    api.fetch<User>("/user/profile", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
   getDashboard: (): Promise<Record<string, unknown>> => api.fetch<Record<string, unknown>>("/user/dashboard"),
 };
 
 export const adminApi = {
   getUsers: (): Promise<User[]> => api.fetch<User[]>("/admin/users"),
+  updateUser: (id: number, data: { username: string; email: string; enabled?: boolean; roles?: string[] }): Promise<User> =>
+    api.fetch<User>(`/admin/users/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
   getDashboard: (): Promise<AdminDashboardData> => api.fetch<AdminDashboardData>("/admin/dashboard"),
 };
 

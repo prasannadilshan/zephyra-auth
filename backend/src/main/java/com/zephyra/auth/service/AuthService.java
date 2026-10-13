@@ -86,25 +86,9 @@ public class AuthService {
         }
 
         Set<Role> roles = new HashSet<>();
-        Set<String> strRoles = registerRequest.getRoles();
-
-        if (strRoles == null || strRoles.isEmpty()) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseGet(() -> roleRepository.save(new Role(ERole.ROLE_USER)));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                if ("admin".equalsIgnoreCase(role) || "role_admin".equalsIgnoreCase(role)) {
-                    Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                            .orElseGet(() -> roleRepository.save(new Role(ERole.ROLE_ADMIN)));
-                    roles.add(adminRole);
-                } else {
-                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                            .orElseGet(() -> roleRepository.save(new Role(ERole.ROLE_USER)));
-                    roles.add(userRole);
-                }
-            });
-        }
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                .orElseGet(() -> roleRepository.save(new Role(ERole.ROLE_USER)));
+        roles.add(userRole);
 
         User user = User.builder()
                 .username(registerRequest.getUsername().trim())

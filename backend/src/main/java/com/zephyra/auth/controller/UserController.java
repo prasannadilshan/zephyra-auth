@@ -1,17 +1,17 @@
 package com.zephyra.auth.controller;
 
+import com.zephyra.auth.dto.request.UpdateProfileRequest;
 import com.zephyra.auth.dto.response.UserProfileResponse;
 import com.zephyra.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +29,16 @@ public class UserController {
     @Operation(summary = "Get user profile", description = "Returns profile details of currently authenticated user")
     public ResponseEntity<UserProfileResponse> getCurrentUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
         UserProfileResponse response = userService.getProfile(userDetails.getUsername());
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/profile")
+    @Operation(summary = "Update user profile", description = "Updates username and email of currently authenticated user")
+    public ResponseEntity<UserProfileResponse> updateProfile(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Valid @RequestBody UpdateProfileRequest request
+    ) {
+        UserProfileResponse response = userService.updateProfile(userDetails.getUsername(), request);
         return ResponseEntity.ok(response);
     }
 
