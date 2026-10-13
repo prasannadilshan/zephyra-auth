@@ -1,0 +1,77 @@
+================================================================================
+ZEPHYRATECH SOLUTIONS (PVT) LTD - FULL-STACK SOFTWARE ENGINEERING ASSESSMENT
+SUBMISSION FILE: submission.txt
+================================================================================
+
+1. GITHUB REPOSITORY URL:
+--------------------------------------------------------------------------------
+Repository: https://github.com/prasannadilshan/zephyra-auth
+Default Branch: main
+Branches Used:
+  - main (Production Ready)
+  - feature/backend-auth (Spring Boot, Spring Security, JWT, PostgreSQL, Tests)
+  - feature/frontend-auth (Next.js 16, TypeScript, Tailwind CSS, Auth Interceptors)
+
+2. DEPLOYED FRONTEND URL (Vercel):
+--------------------------------------------------------------------------------
+Frontend URL: https://zephyra-auth-tau.vercel.app
+(Note: If redeployed or custom alias used, update to the active Vercel domain)
+
+3. DEPLOYED BACKEND URL (Render.com):
+--------------------------------------------------------------------------------
+Backend Service URL: https://zephyra-auth-backend.onrender.com
+Swagger UI / OpenAPI Documentation: https://zephyra-auth-backend.onrender.com/swagger-ui.html
+OpenAPI v3 JSON Spec: https://zephyra-auth-backend.onrender.com/v3/api-docs
+
+4. HEALTH-CHECK ENDPOINT URL:
+--------------------------------------------------------------------------------
+Public Health-Check: https://zephyra-auth-backend.onrender.com/api/health
+Actuator Health Endpoint: https://zephyra-auth-backend.onrender.com/actuator/health
+
+5. TEST-ACCOUNT CREDENTIALS:
+--------------------------------------------------------------------------------
+The database is pre-seeded on startup with the following test credentials:
+
+[A] Administrator Account:
+    Role:        ROLE_ADMIN
+    Email:       admin@zephyra.com
+    Password:    Admin@123456
+    Permissions: Access to User Profile, User Endpoints (/api/user/**),
+                 Admin Portal (/api/admin/users, /api/admin/stats)
+
+[B] Standard User Account:
+    Role:        ROLE_USER
+    Email:       user@zephyra.com
+    Password:    User@123456
+    Permissions: Access to User Profile, User Endpoints (/api/user/profile,
+                 /api/user/status). Restricted from Admin Portal (403 Forbidden).
+
+[C] Self-Registration:
+    New accounts can also be created via the web interface (/register) or via:
+    POST /api/auth/register with desired roles (ROLE_USER, ROLE_ADMIN).
+
+6. TECHNICAL ARCHITECTURE SUMMARY:
+--------------------------------------------------------------------------------
+- Backend Architecture:
+  * Runtime: Java 21 LTS, Spring Boot 4.1.1
+  * Security: Spring Security 6, Stateless JWT (JJWT 0.12.6, HMAC-SHA256)
+  * Refresh Token Strategy: Secure UUID tokens stored in PostgreSQL with
+    expiration tracking, single-use rotation, and revocation on logout
+  * Database: PostgreSQL (Render Managed PostgreSQL instance: zephyra_auth_db)
+  * Dialect & ORM: Spring Data JPA, Hibernate 7
+  * Containerization: Multi-stage Dockerfile (eclipse-temurin:21) with dynamic $PORT
+  * Tests: 19 automated tests (Unit & MockMvc Integration tests, 100% passing)
+
+- Frontend Architecture:
+  * Runtime: Next.js 16.4.0 (Turbopack), React 19, TypeScript
+  * Styling: Tailwind CSS 4 with custom dark/light theme tokens and glassmorphism
+  * Session Management: AuthContext with localStorage persistence
+  * Token Interceptor: Axios-like resilient fetch client that automatically detects
+    HTTP 401, issues a POST /api/auth/refresh-token request, rotates tokens,
+    and replays pending requests seamlessly
+  * Quick-Fill Helpers: Login page includes 1-click test credential population buttons
+
+================================================================================
+Submitted by: Prasanna Dilshan
+Date: October 2026
+================================================================================
