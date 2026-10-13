@@ -32,19 +32,26 @@ export default function HomePage() {
   return (
     <div className="flex-1 flex flex-col">
       {/* Hero Section */}
-      <section className="pt-20 pb-20 text-center">
+      <section className="relative pt-20 pb-20 text-center overflow-hidden">
+        {/* Soft colorful ambient aura */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-100/40 via-indigo-50/20 to-transparent pointer-events-none -z-10 blur-3xl"></div>
+
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-blue-700 border border-blue-200 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <ShieldCheck className="w-4 h-4 text-blue-600" />
             <span>Enterprise Identity &amp; Access Management</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 max-w-3xl mx-auto leading-tight">
-            Secure Authentication with Role-Based Access Control
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight">
+            Secure Authentication with{" "}
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+              Role-Based Access Control
+            </span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Reliable authentication service with JWT token rotation, Spring Security, and Next.js integration.
+            Reliable authentication service with stateless JWT rotation, Spring Security, PostgreSQL, and Next.js frontend integration.
           </p>
 
           {/* CTA Buttons */}
@@ -53,7 +60,7 @@ export default function HomePage() {
               <>
                 <Link
                   href="/dashboard"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-xs transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-500/25 transition-all"
                 >
                   <span>Go to Dashboard</span>
                   <ArrowRight className="w-4 h-4" />
@@ -61,7 +68,7 @@ export default function HomePage() {
                 {isAdmin && (
                   <Link
                     href="/admin"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-colors shadow-xs"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-purple-700 bg-purple-50 border border-purple-200 hover:bg-purple-100 transition-colors shadow-xs"
                   >
                     <span>Admin Portal</span>
                   </Link>
@@ -71,7 +78,7 @@ export default function HomePage() {
               <>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-xs transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-500/25 transition-all"
                 >
                   <span>Sign In</span>
                   <ArrowRight className="w-4 h-4" />
@@ -88,9 +95,9 @@ export default function HomePage() {
 
           {/* System status pill */}
           <div className="pt-4 flex justify-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-xs text-slate-600 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>Backend Service: <strong>{health?.status === "UP" ? "Online" : "Operational"}</strong></span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs text-slate-600 shadow-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-xs"></span>
+              <span>Backend Service: <strong className="text-emerald-700 font-semibold">{health?.status === "UP" ? "Online & Healthy" : "Operational"}</strong></span>
             </div>
           </div>
         </div>
@@ -100,7 +107,7 @@ export default function HomePage() {
       <section className="py-16 bg-white border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-xl mx-auto space-y-2">
-            <h2 className="text-2xl font-bold text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
               Core Capabilities
             </h2>
             <p className="text-sm text-slate-500">
@@ -109,37 +116,55 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
-                <KeyRound className="w-5 h-5" />
+            {/* Card 1 - Amber Accent */}
+            <div className="p-7 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-amber-500 shadow-sm hover:shadow-md transition-shadow space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-xs">
+                <KeyRound className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">
-                JWT Token Rotation
-              </h3>
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 block mb-1">
+                  Token Lifecycle
+                </span>
+                <h3 className="font-bold text-lg text-slate-900">
+                  JWT Token Rotation
+                </h3>
+              </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Short-lived HMAC-SHA256 access tokens with persisted refresh tokens and automatic background renewal.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
-                <Users className="w-5 h-5" />
+            {/* Card 2 - Violet Accent */}
+            <div className="p-7 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-violet-500 shadow-sm hover:shadow-md transition-shadow space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-bold shadow-xs">
+                <Users className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">
-                Role-Based Authorization
-              </h3>
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-violet-700 block mb-1">
+                  Access Control
+                </span>
+                <h3 className="font-bold text-lg text-slate-900">
+                  Role-Based Authorization
+                </h3>
+              </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Fine-grained permissions for standard users and administrators with protected routes.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
-                <Server className="w-5 h-5" />
+            {/* Card 3 - Emerald Accent */}
+            <div className="p-7 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-emerald-500 shadow-sm hover:shadow-md transition-shadow space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shadow-xs">
+                <Server className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-base text-slate-900">
-                Enterprise Backend
-              </h3>
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 block mb-1">
+                  Infrastructure
+                </span>
+                <h3 className="font-bold text-lg text-slate-900">
+                  Enterprise Backend
+                </h3>
+              </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Java 21 LTS, Spring Boot, and PostgreSQL database providing production-grade security.
               </p>

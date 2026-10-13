@@ -58,19 +58,31 @@ export default function RegisterPage() {
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex p-3 rounded-full bg-blue-50 text-blue-600 mb-2">
+          <div className="inline-flex p-3 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/25 mb-2">
             <ShieldCheck className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
             Create an Account
           </h1>
           <p className="text-sm text-slate-500">
             Sign up to get started with Zephyra
           </p>
+
+          <div className="flex items-center justify-center gap-1.5 pt-1">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+              Stateless JWT
+            </span>
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              BCrypt Security
+            </span>
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+              Standard User
+            </span>
+          </div>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm space-y-5">
+        <div className="bg-white rounded-2xl border border-slate-200 border-t-4 border-t-indigo-600 p-8 shadow-sm space-y-5">
           {errorMessage && (
             <div className="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-start gap-2.5">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-500" />
@@ -168,7 +180,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-2.5 px-4 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+              className="w-full py-2.5 px-4 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 transition-all shadow-md shadow-indigo-500/25 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
             >
               {submitting ? (
                 <>

@@ -18,6 +18,8 @@ import {
   Loader2,
   AlertCircle,
   Save,
+  Hash,
+  KeyRound,
 } from "lucide-react";
 
 export default function UserDashboardPage() {
@@ -84,24 +86,29 @@ export default function UserDashboardPage() {
         </div>
 
         {/* User Profile Card */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm space-y-8">
+        <div className="bg-white rounded-2xl border border-slate-200 border-t-4 border-t-blue-600 p-8 shadow-sm space-y-8">
           {/* Header Info */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl font-bold uppercase shadow-sm">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center text-2xl font-bold uppercase shadow-md shadow-indigo-500/20">
                 {user?.username?.charAt(0) || "U"}
               </div>
               <div>
-                <h2 className="text-xl font-bold text-slate-900">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
                   {user?.username}
                 </h2>
                 <p className="text-sm text-slate-500">{user?.email}</p>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                  <span className={`inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-semibold ${
+                    isAdmin
+                      ? "bg-purple-50 text-purple-700 border border-purple-200"
+                      : "bg-sky-50 text-sky-700 border border-sky-200"
+                  }`}>
                     <Shield className="w-3 h-3" />
                     {isAdmin ? "Administrator" : "Standard User"}
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                     <CheckCircle className="w-3 h-3 text-emerald-500" /> Active
                   </span>
                 </div>
@@ -111,7 +118,7 @@ export default function UserDashboardPage() {
             <div className="flex items-center gap-3">
               <button
                 onClick={openEditModal}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 text-sm font-semibold transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all shadow-sm shadow-blue-500/20"
               >
                 <Pencil className="w-4 h-4" />
                 <span>Edit Details</span>
@@ -120,7 +127,7 @@ export default function UserDashboardPage() {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-sm font-semibold transition-all shadow-sm shadow-purple-500/20"
                 >
                   <Users className="w-4 h-4" />
                   <span>Admin Portal</span>
@@ -129,34 +136,58 @@ export default function UserDashboardPage() {
             </div>
           </div>
 
-          {/* User Details Grid */}
+          {/* User Details Grid with Vibrant Accents */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                Username
-              </span>
-              <p className="text-base font-semibold text-slate-900">{user?.username}</p>
+            {/* Tile 1: Sky Blue */}
+            <div className="p-5 rounded-2xl bg-sky-50/70 border border-sky-200/80 space-y-2">
+              <div className="flex items-center gap-2 text-sky-700">
+                <div className="w-7 h-7 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center">
+                  <UserIcon className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  Username
+                </span>
+              </div>
+              <p className="text-lg font-bold text-slate-900">{user?.username}</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                Email Address
-              </span>
-              <p className="text-base font-semibold text-slate-900">{user?.email}</p>
+            {/* Tile 2: Indigo */}
+            <div className="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-2">
+              <div className="flex items-center gap-2 text-indigo-700">
+                <div className="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  Email Address
+                </span>
+              </div>
+              <p className="text-lg font-bold text-slate-900">{user?.email}</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                Account ID
-              </span>
-              <p className="text-base font-semibold text-slate-900">#{user?.id}</p>
+            {/* Tile 3: Violet */}
+            <div className="p-5 rounded-2xl bg-purple-50/70 border border-purple-200/80 space-y-2">
+              <div className="flex items-center gap-2 text-purple-700">
+                <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center">
+                  <Hash className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  Account ID
+                </span>
+              </div>
+              <p className="text-lg font-bold text-slate-900">#{user?.id}</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                Assigned Roles
-              </span>
-              <p className="text-base font-semibold text-slate-900">
+            {/* Tile 4: Emerald */}
+            <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 space-y-2">
+              <div className="flex items-center gap-2 text-emerald-700">
+                <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                  <KeyRound className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  Assigned Roles
+                </span>
+              </div>
+              <p className="text-lg font-bold text-slate-900">
                 {user?.roles?.map((r) => r.replace("ROLE_", "")).join(", ") || "USER"}
               </p>
             </div>
