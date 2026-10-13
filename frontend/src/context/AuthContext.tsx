@@ -17,6 +17,7 @@ interface AuthContextType {
   register: (data: { username: string; email: string; password: string; roles?: string[] }) => Promise<void>;
   logout: () => Promise<void>;
   refreshUserProfile: () => Promise<void>;
+  updateActiveUser: (updatedUser: User, newAccessToken?: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -54,6 +55,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem("user", JSON.stringify(profile));
     } catch {
       // Handled by token refresh or interceptor
+    }
+  }, []);
+
+  const updateActiveUser = useCallback((updatedUser: User, newAccessToken?: string) => {
+    setUser((prev) => {
+      const merged = { ...(prev || {}), ...updatedUser };
+      localStorage.setItem("user", JSON.stringify(merged));
+      return merged;
+    });
+
+    if (newAccessToken) {
+      setAccessToken(newAccessToken);
+      const currentRefresh = api.getRefreshToken();
+      if (currentRefresh) {
+        api.setTokens(newAccessToken, currentRefresh);
+      }
     }
   }, []);
 
@@ -154,6 +171,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         register,
         logout,
         refreshUserProfile,
+        updateActiveUser,
       }}
     >
       {children}

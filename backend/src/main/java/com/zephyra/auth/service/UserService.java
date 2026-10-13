@@ -26,6 +26,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final RefreshTokenService refreshTokenService;
+    private final com.zephyra.auth.security.jwt.JwtUtils jwtUtils;
 
     @Transactional(readOnly = true)
     public UserProfileResponse getProfile(String usernameOrEmail) {
@@ -57,7 +58,14 @@ public class UserService {
         user.setEmail(newEmail);
         User updated = userRepository.save(user);
 
-        return toUserProfileResponse(updated);
+        List<String> roles = updated.getRoles().stream()
+                .map(r -> r.getName().name())
+                .toList();
+        String newAccessToken = jwtUtils.generateTokenFromUsername(updated.getUsername(), roles);
+
+        UserProfileResponse response = toUserProfileResponse(updated);
+        response.setAccessToken(newAccessToken);
+        return response;
     }
 
     @Transactional(readOnly = true)

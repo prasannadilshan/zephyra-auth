@@ -3,17 +3,7 @@ import { AuthResponse, TokenRefreshResponse, User, AdminDashboardData, HealthRes
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
 
 class ApiClient {
-  private isRefreshing = false;
-  private refreshSubscribers: ((token: string) => void)[] = [];
-
-  private onRefreshed(token: string) {
-    this.refreshSubscribers.forEach((cb) => cb(token));
-    this.refreshSubscribers = [];
-  }
-
-  private addRefreshSubscriber(cb: (token: string) => void) {
-    this.refreshSubscribers.push(cb);
-  }
+  private refreshPromise: Promise<string> | null = null;
 
   public getAccessToken(): string | null {
     if (typeof window === "undefined") return null;
@@ -36,6 +26,37 @@ class ApiClient {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
+  }
+
+  private async refreshAccessToken(): Promise<string> {
+    const refreshToken = this.getRefreshToken();
+    if (!refreshToken) {
+      this.clearTokens();
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("auth:logout"));
+      }
+      throw new Error("Session expired. Please log in again.");
+    }
+
+    if (!this.refreshPromise) {
+      this.refreshPromise = this.refreshTokenRequest(refreshToken)
+        .then((res) => {
+          this.setTokens(res.accessToken, res.refreshToken);
+          return res.accessToken;
+        })
+        .catch((err) => {
+          this.clearTokens();
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(new CustomEvent("auth:logout"));
+          }
+          throw err;
+        })
+        .finally(() => {
+          this.refreshPromise = null;
+        });
+    }
+
+    return this.refreshPromise;
   }
 
   public async fetch<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -62,32 +83,14 @@ class ApiClient {
         const refreshToken = this.getRefreshToken();
 
         if (refreshToken) {
-          if (!this.isRefreshing) {
-            this.isRefreshing = true;
-
-            try {
-              const refreshResult = await this.refreshTokenRequest(refreshToken);
-              this.setTokens(refreshResult.accessToken, refreshResult.refreshToken);
-              this.isRefreshing = false;
-              this.onRefreshed(refreshResult.accessToken);
-            } catch (refreshErr) {
-              this.isRefreshing = false;
-              this.clearTokens();
-              if (typeof window !== "undefined") {
-                window.dispatchEvent(new CustomEvent("auth:logout"));
-              }
-              throw refreshErr;
-            }
+          try {
+            const newToken = await this.refreshAccessToken();
+            headers.set("Authorization", `Bearer ${newToken}`);
+            const retryResponse = await fetch(url, { ...options, headers });
+            return this.handleResponse<T>(retryResponse);
+          } catch (refreshErr) {
+            throw refreshErr;
           }
-
-          // Wait for the active refresh to finish, then retry original request
-          const retryWithNewToken = await new Promise<string>((resolve) => {
-            this.addRefreshSubscriber((newToken) => resolve(newToken));
-          });
-
-          headers.set("Authorization", `Bearer ${retryWithNewToken}`);
-          const retryResponse = await fetch(url, { ...options, headers });
-          return this.handleResponse<T>(retryResponse);
         } else {
           this.clearTokens();
           if (typeof window !== "undefined") {
