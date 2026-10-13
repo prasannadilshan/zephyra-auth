@@ -1,6 +1,7 @@
 import { AuthResponse, TokenRefreshResponse, User, AdminDashboardData, HealthResponse, ApiError } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+const rawUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api").trim().replace(/\/+$/, "");
+const API_BASE_URL = rawUrl.endsWith("/api") ? rawUrl : `${rawUrl}/api`;
 
 class ApiClient {
   private refreshPromise: Promise<string> | null = null;

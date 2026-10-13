@@ -138,7 +138,9 @@ Verify all endpoints (`/api/auth/**`, `/api/user/**`, `/api/admin/**`, `/api/hea
 
 ### 3. Administrator Login Test
 1. Open your Vercel deployment URL (`https://<your-app>.vercel.app/login`).
-2. Click **Quick-Fill Admin** (or enter `admin@zephyra.com` / `Admin@123456`).
+2. Enter administrator credentials:
+   - **Email / Username**: `admin@zephyra.com`
+   - **Password**: `Admin@123456`
 3. Click **Sign in to Account**.
 4. You should be redirected to `/dashboard`, showing:
    - User profile with `ROLE_ADMIN` badge.
@@ -150,7 +152,9 @@ Verify all endpoints (`/api/auth/**`, `/api/user/**`, `/api/admin/**`, `/api/hea
 
 ### 4. Standard User & RBAC Restriction Test
 1. Log out.
-2. Click **Quick-Fill User** (or enter `user@zephyra.com` / `User@123456`).
+2. Enter standard user credentials:
+   - **Email / Username**: `user@zephyra.com`
+   - **Password**: `User@123456`
 3. Click **Sign in to Account**.
 4. Test `/api/user/profile` -> Returns HTTP 200 with user data.
 5. In the endpoint tester, click **Test Admin Endpoint (`/api/admin/stats`)** -> Returns HTTP 403 Forbidden with proper access-denied message.
