@@ -1,83 +1,38 @@
 ================================================================================
-ZEPHYRATECH SOLUTIONS (PVT) LTD - FULL-STACK SOFTWARE ENGINEERING ASSESSMENT
 SUBMISSION FILE: submission.txt
 ================================================================================
 
-1. GITHUB REPOSITORY URL:
---------------------------------------------------------------------------------
-Repository: https://github.com/prasannadilshan/zephyra-auth
-Default Branch: main
-Branches Used:
-  - main (Production Ready)
-  - feature/backend-auth (Spring Boot, Spring Security, JWT, PostgreSQL, Tests)
-  - feature/frontend-auth (Next.js 16, TypeScript, Tailwind CSS, Auth Interceptors)
-  - feature/user-profile-editing (Profile & user management, editing controls, RBAC validation)
-  - feature/remove-gradients (Design refinement removing AI-style gradients in favor of solid colors)
-  - feature/security-hardening (XSS protection, CSP, HSTS, input sanitization, security headers, automated security tests)
+1. GITHUB REPOSITORY LINK:
+https://github.com/prasannadilshan/zephyra-auth
 
-2. DEPLOYED FRONTEND URL (Vercel):
---------------------------------------------------------------------------------
-Frontend URL: https://zephyra-auth-tau.vercel.app
-(Note: If redeployed or custom alias used, update to the active Vercel domain)
+2. DEPLOYED FRONTEND URL:
+https://zephyra-auth.vercel.app
 
-3. DEPLOYED BACKEND URL (Render.com):
---------------------------------------------------------------------------------
-Backend Service URL: https://zephyra-auth-backend.onrender.com
-Swagger UI / OpenAPI Documentation: https://zephyra-auth-backend.onrender.com/swagger-ui.html
-OpenAPI v3 JSON Spec: https://zephyra-auth-backend.onrender.com/v3/api-docs
+3. DEPLOYED BACKEND URL:
+https://zephyra-auth.onrender.com
 
-4. HEALTH-CHECK ENDPOINT URL:
---------------------------------------------------------------------------------
-Public Health-Check: https://zephyra-auth-backend.onrender.com/api/health
-Actuator Health Endpoint: https://zephyra-auth-backend.onrender.com/actuator/health
+4. API HEALTH-CHECK URL:
+https://zephyra-auth.onrender.com/api/health
 
-5. TEST-ACCOUNT CREDENTIALS:
---------------------------------------------------------------------------------
-The database is pre-seeded on startup with the following test credentials:
+5. SAFE TEST-ACCOUNT DETAILS & INSTRUCTIONS:
+The application is pre-seeded with the following safe test accounts:
 
-[A] Administrator Account:
-    Role:        ROLE_ADMIN
-    Email:       admin@zephyra.com
-    Password:    Admin@123456
-    Permissions: Access to User Profile, User Endpoints (/api/user/**),
-                 Admin Portal (/api/admin/users, /api/admin/stats, /api/admin/users/{id})
+[Administrator Account]
+Email:    admin@zephyra.com
+Password: Admin@123456
+Role:     ROLE_ADMIN (Full access to User Dashboard and Admin Portal)
 
-[B] Standard User Account:
-    Role:        ROLE_USER
-    Email:       user@zephyra.com
-    Password:    User@123456
-    Permissions: Access to User Profile, User Endpoints (/api/user/profile,
-                 /api/user/status). Restricted from Admin Portal (403 Forbidden).
+[Standard User Account]
+Email:    user@zephyra.com
+Password: User@123456
+Role:     ROLE_USER (Access to User Dashboard; restricted from Admin Portal)
 
-[C] Self-Registration:
-    New accounts can be created via the web interface (/register) or via:
-    POST /api/auth/register. Public registration assigns standard user privileges
-    (ROLE_USER) exclusively to prevent privilege escalation.
+[Instructions for Creating a Test Account]
+New test accounts can be self-registered directly via the web interface:
+1. Navigate to: https://zephyra-auth.vercel.app/register
+2. Fill in username, email, and password (minimum 6 characters).
+3. Submit the registration form and log in via https://zephyra-auth.vercel.app/login.
+(Alternatively, register via API: POST https://zephyra-auth.onrender.com/api/auth/register)
+All public registrations receive standard user (ROLE_USER) permissions safely.
 
-6. TECHNICAL ARCHITECTURE SUMMARY:
---------------------------------------------------------------------------------
-- Backend Architecture:
-  * Runtime: Java 21 LTS, Spring Boot 4.1.1
-  * Security: Spring Security 6, Stateless JWT (JJWT 0.12.6, HMAC-SHA256)
-  * Refresh Token Strategy: Secure UUID tokens stored in PostgreSQL with
-    expiration tracking, single-use rotation, and revocation on logout
-  * Database: PostgreSQL (Render Managed PostgreSQL instance: zephyra_auth_db)
-  * Dialect & ORM: Spring Data JPA, Hibernate 7
-  * Containerization: Multi-stage Dockerfile (eclipse-temurin:21) with dynamic $PORT
-  * Tests: 20 automated tests (Unit & MockMvc Integration tests, 100% passing)
-
-- Frontend Architecture:
-  * Runtime: Next.js 16.4.0 (Turbopack), React 19, TypeScript
-  * Styling: Tailwind CSS 4 with custom light corporate theme (Blue/Slate)
-  * Session Management: AuthContext with localStorage persistence
-  * Token Interceptor: Axios-like resilient fetch client that automatically detects
-    HTTP 401, issues a POST /api/auth/refresh-token request, rotates tokens,
-    and replays pending requests seamlessly
-  * Profile & User Management: Standard users can edit their profile details directly
-    in the dashboard; administrators can edit usernames, emails, account active/disabled
-    status, and assigned roles in the admin portal.
-
-================================================================================
-Submitted by: Prasanna Dilshan
-Date: October 2026
 ================================================================================
