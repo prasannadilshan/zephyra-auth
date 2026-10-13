@@ -6,7 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Render_Managed-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Tests Passing](https://img.shields.io/badge/Tests-19%2F19_Passed-brightgreen)](https://github.com/prasannadilshan/zephyra-auth)
+[![Tests Passing](https://img.shields.io/badge/Tests-22%2F22_Passed-brightgreen)](https://github.com/prasannadilshan/zephyra-auth)
 
 Production-grade, full-stack authentication and authorization system powered by Spring Boot and Next.js. 
 
@@ -27,10 +27,15 @@ Production-grade, full-stack authentication and authorization system powered by 
 - **🎨 Modern Responsive UI**:
   - Built with Next.js 16 App Router, React 19, and Tailwind CSS.
   - Clean, accessible design with rounded controls, live profile editing, token lifecycle inspector, and dedicated admin user management.
+- **🛡️ Enterprise Security Hardening & XSS Protection**:
+  - Request-level XSS sanitization filter stripping malicious tags and script vectors.
+  - Strict input pattern validation on all user DTOs preventing stored and reflected attacks.
+  - Robust HTTP response security headers (CSP, HSTS, X-Content-Type-Options: nosniff, X-Frame-Options, X-XSS-Protection, Referrer-Policy).
+  - Sanitized global error responses preventing database or stack trace information leakage.
 - **📖 OpenAPI 3 / Swagger UI Documentation**:
   - Interactive API documentation hosted at `/swagger-ui.html`.
 - **🧪 Comprehensive Test Suite**:
-  - 19 automated unit and integration tests covering authentication, RBAC, JWT validation, and token rotation.
+  - 22 automated unit and integration tests covering authentication, RBAC, JWT validation, token rotation, XSS rejection, and security headers.
 - **🐳 Multi-Stage Docker Containerization**:
   - Alpine-based multi-stage Docker build ready for zero-config Render deployment.
 
