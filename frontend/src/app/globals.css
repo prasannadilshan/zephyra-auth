@@ -3,10 +3,18 @@
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
+  color-scheme: light;
+}
+
+html {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  color-scheme: light;
 }
 
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  color-scheme: light;
   min-height: 100vh;
 }
