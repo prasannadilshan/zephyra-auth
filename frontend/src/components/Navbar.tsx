@@ -18,7 +18,6 @@ export function Navbar() {
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Brand Logo */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:bg-blue-700 transition-colors">
@@ -29,7 +28,6 @@ export function Navbar() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
               <Link
                 href="/"
@@ -74,11 +72,9 @@ export function Navbar() {
             </nav>
           </div>
 
-          {/* Right Header items */}
           <div className="flex items-center gap-3">
             <HealthBadge />
 
-            {/* User status & Auth CTAs */}
             {isAuthenticated ? (
               <div className="hidden sm:flex items-center gap-3">
                 <div className="flex items-center gap-2 pl-2">
@@ -124,7 +120,6 @@ export function Navbar() {
               </div>
             )}
 
-            {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 rounded-full text-slate-600 hover:bg-slate-100"
@@ -135,7 +130,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2">
           <Link

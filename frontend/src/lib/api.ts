@@ -79,7 +79,6 @@ class ApiClient {
         headers,
       });
 
-      // If token expired (401) and not already trying to refresh or login
       if (response.status === 401 && !endpoint.includes("/auth/login") && !endpoint.includes("/auth/refresh-token")) {
         const refreshToken = this.getRefreshToken();
 
@@ -152,7 +151,6 @@ class ApiClient {
 
 export const api = new ApiClient();
 
-// High level API helpers
 export const authApi = {
   login: (usernameOrEmail: string, password: string): Promise<AuthResponse> =>
     api.fetch<AuthResponse>("/auth/login", {

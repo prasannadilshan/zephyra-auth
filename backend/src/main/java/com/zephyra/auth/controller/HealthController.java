@@ -14,7 +14,7 @@ import java.time.Instant;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Health Check", description = "Public health monitoring endpoints for automated checks and assessment verification")
+@Tag(name = "Health Check", description = "Public service health and status monitoring")
 public class HealthController {
 
     private final JdbcTemplate jdbcTemplate;

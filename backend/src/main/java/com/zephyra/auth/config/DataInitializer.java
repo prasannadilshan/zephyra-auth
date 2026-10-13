@@ -34,7 +34,6 @@ public class DataInitializer implements CommandLineRunner {
         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                 .orElseGet(() -> roleRepository.save(new Role(ERole.ROLE_ADMIN)));
 
-        // Default Admin account
         if (!userRepository.existsByUsername("admin") && !userRepository.existsByEmail("admin@zephyra.com")) {
             User admin = User.builder()
                     .username("admin")
@@ -47,7 +46,6 @@ public class DataInitializer implements CommandLineRunner {
             log.info("Default Admin account seeded: admin@zephyra.com / Admin@123456");
         }
 
-        // Default Regular User account
         if (!userRepository.existsByUsername("user") && !userRepository.existsByEmail("user@zephyra.com")) {
             User user = User.builder()
                     .username("user")

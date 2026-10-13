@@ -34,7 +34,6 @@ export default function AdminPortalPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRole, setFilterRole] = useState<string>("ALL");
 
-  // Admin edit user modal states
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [editUsername, setEditUsername] = useState("");
   const [editEmail, setEditEmail] = useState("");
@@ -82,7 +81,6 @@ export default function AdminPortalPage() {
 
   const toggleRole = (role: string) => {
     if (editRoles.includes(role)) {
-      // Must have at least one role
       if (editRoles.length > 1) {
         setEditRoles(editRoles.filter((r) => r !== role));
       }
@@ -132,7 +130,6 @@ export default function AdminPortalPage() {
       closeEditModal();
       await loadAdminData();
 
-      // If updating current logged in admin, sync the auth session
       if (currentUser && currentUser.id === editingUser.id) {
         await refreshUserProfile();
       }
@@ -160,7 +157,6 @@ export default function AdminPortalPage() {
   return (
     <ProtectedRoute requireAdmin={true}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-8">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
@@ -181,7 +177,6 @@ export default function AdminPortalPage() {
           </button>
         </div>
 
-        {/* 3 Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-blue-600 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shadow-xs">
@@ -226,9 +221,7 @@ export default function AdminPortalPage() {
           </div>
         </div>
 
-        {/* Users Management Table Card */}
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          {/* Table Controls */}
           <div className="p-5 border-b border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <div className="relative flex-1 max-w-sm">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -255,7 +248,6 @@ export default function AdminPortalPage() {
             </div>
           </div>
 
-          {/* Table Content */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">
@@ -343,7 +335,6 @@ export default function AdminPortalPage() {
         </div>
       </div>
 
-      {/* Admin Edit User Modal */}
       {editingUser && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xl max-w-lg w-full p-6 space-y-5">
@@ -413,7 +404,6 @@ export default function AdminPortalPage() {
                 </div>
               </div>
 
-              {/* Status Toggle */}
               <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 block">
@@ -434,7 +424,6 @@ export default function AdminPortalPage() {
                 </label>
               </div>
 
-              {/* Roles Toggle */}
               <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 block">
                   Assigned Roles

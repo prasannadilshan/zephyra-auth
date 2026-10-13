@@ -1,7 +1,3 @@
-================================================================================
-SUBMISSION FILE: submission.txt
-================================================================================
-
 1. GITHUB REPOSITORY LINK:
 https://github.com/prasannadilshan/zephyra-auth
 
@@ -17,17 +13,20 @@ https://zephyra-auth.onrender.com/api/health
 5. SAFE TEST-ACCOUNT DETAILS & INSTRUCTIONS:
 The application is pre-seeded with the following safe test accounts:
 
-[Administrator Account]
+Administrator Account
+
 Email:    admin@zephyra.com
 Password: Admin@123456
 Role:     ROLE_ADMIN (Full access to User Dashboard and Admin Portal)
 
-[Standard User Account]
+Standard User Account
+
 Email:    user@zephyra.com
 Password: User@123456
 Role:     ROLE_USER (Access to User Dashboard; restricted from Admin Portal)
 
-[Instructions for Creating a Test Account]
+Instructions for Creating a Test Account
+
 New test accounts can be self-registered directly via the web interface:
 1. Navigate to: https://zephyra-auth.vercel.app/register
 2. Fill in username, email, and password (minimum 6 characters).
@@ -35,4 +34,3 @@ New test accounts can be self-registered directly via the web interface:
 (Alternatively, register via API: POST https://zephyra-auth.onrender.com/api/auth/register)
 All public registrations receive standard user (ROLE_USER) permissions safely.
 
-================================================================================

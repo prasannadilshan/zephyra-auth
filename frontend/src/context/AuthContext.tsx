@@ -37,7 +37,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await authApi.logout(currentRefresh);
       }
     } catch {
-      // Ignore network errors on logout
     } finally {
       api.clearTokens();
       setUser(null);
@@ -54,7 +53,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(profile);
       localStorage.setItem("user", JSON.stringify(profile));
     } catch {
-      // Handled by token refresh or interceptor
     }
   }, []);
 
@@ -74,7 +72,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Initialize from localStorage on mount
   useEffect(() => {
     const initAuth = async () => {
       const storedAccess = api.getAccessToken();
@@ -88,17 +85,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           try {
             setUser(JSON.parse(storedUser));
           } catch {
-            // parse error
           }
         }
 
         try {
-          // Verify & refresh profile with backend
           const profile = await userApi.getProfile();
           setUser(profile);
           localStorage.setItem("user", JSON.stringify(profile));
         } catch {
-          // In case token is invalid, interceptor handles refresh or clears
         }
       }
       setIsLoading(false);
@@ -106,7 +100,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     initAuth();
 
-    // Listen to custom auth:logout event from API client
     const handleForcedLogout = () => {
       setUser(null);
       setAccessToken(null);

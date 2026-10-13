@@ -31,7 +31,6 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col">
-      {/* Hero Section */}
       <section className="pt-20 pb-20 text-center">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-blue-700 border border-blue-200 shadow-xs">
@@ -51,7 +50,6 @@ export default function HomePage() {
             Reliable authentication service with stateless JWT rotation, Spring Security, PostgreSQL, and Next.js frontend integration.
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
             {isAuthenticated ? (
               <>
@@ -90,7 +88,6 @@ export default function HomePage() {
             )}
           </div>
 
-          {/* System status pill */}
           <div className="pt-4 flex justify-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-xs text-slate-600 shadow-xs">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-xs"></span>
@@ -100,7 +97,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Feature Pillars */}
       <section className="py-16 bg-white border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-xl mx-auto space-y-2">
@@ -113,7 +109,6 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1 - Amber Accent */}
             <div className="p-7 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-amber-500 shadow-sm hover:shadow-md transition-shadow space-y-4">
               <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-xs">
                 <KeyRound className="w-6 h-6" />
@@ -131,7 +126,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Card 2 - Violet Accent */}
             <div className="p-7 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-violet-500 shadow-sm hover:shadow-md transition-shadow space-y-4">
               <div className="w-12 h-12 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center font-bold shadow-xs">
                 <Users className="w-6 h-6" />
@@ -149,7 +143,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Card 3 - Emerald Accent */}
             <div className="p-7 rounded-2xl bg-white border border-slate-200 border-t-4 border-t-emerald-500 shadow-sm hover:shadow-md transition-shadow space-y-4">
               <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shadow-xs">
                 <Server className="w-6 h-6" />

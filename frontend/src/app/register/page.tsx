@@ -74,7 +74,6 @@ export default function RegisterPage() {
   return (
     <div className="flex-1 flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
-        {/* Header */}
         <div className="text-center space-y-2">
           <div className="inline-flex p-3 rounded-2xl bg-blue-600 text-white shadow-xs mb-2">
             <ShieldCheck className="w-8 h-8" />
@@ -85,21 +84,8 @@ export default function RegisterPage() {
           <p className="text-sm text-slate-500">
             Sign up to get started with Zephyra
           </p>
-
-          <div className="flex items-center justify-center gap-1.5 pt-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-              Stateless JWT
-            </span>
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              BCrypt Security
-            </span>
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-50 text-purple-700 border border-purple-200">
-              Standard User
-            </span>
-          </div>
         </div>
 
-        {/* Form Card */}
         <div className="bg-white rounded-2xl border border-slate-200 border-t-4 border-t-indigo-600 p-8 shadow-sm space-y-5">
           {errorMessage && (
             <div className="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-start gap-2.5">
