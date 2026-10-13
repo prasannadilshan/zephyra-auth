@@ -25,7 +25,6 @@ public final class XssSanitizer {
     };
 
     private XssSanitizer() {
-        // Utility class
     }
 
     public static String sanitize(String value) {

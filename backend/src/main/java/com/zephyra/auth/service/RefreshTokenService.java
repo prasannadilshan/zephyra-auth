@@ -34,7 +34,6 @@ public class RefreshTokenService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-        // Find existing token or create a new one
         RefreshToken refreshToken = refreshTokenRepository.findByUser(user)
                 .orElseGet(() -> RefreshToken.builder()
                         .user(user)

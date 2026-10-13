@@ -44,12 +44,10 @@ public class UserService {
         String newUsername = request.getUsername().trim();
         String newEmail = request.getEmail().trim().toLowerCase();
 
-        // Check unique username if changed
         if (!user.getUsername().equalsIgnoreCase(newUsername) && userRepository.existsByUsername(newUsername)) {
             throw new BadRequestException("Username '" + newUsername + "' is already taken");
         }
 
-        // Check unique email if changed
         if (!user.getEmail().equalsIgnoreCase(newEmail) && userRepository.existsByEmail(newEmail)) {
             throw new BadRequestException("Email '" + newEmail + "' is already registered");
         }

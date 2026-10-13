@@ -51,7 +51,6 @@ export default function LoginPage() {
   return (
     <div className="flex-1 flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
-        {/* Header */}
         <div className="text-center space-y-2">
           <div className="inline-flex p-3 rounded-2xl bg-blue-600 text-white shadow-xs mb-2">
             <ShieldCheck className="w-8 h-8" />
@@ -64,7 +63,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Form Card */}
         <div className="bg-white rounded-2xl border border-slate-200 border-t-4 border-t-blue-600 p-8 shadow-sm space-y-5">
           {errorMessage && (
             <div className="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-start gap-2.5">

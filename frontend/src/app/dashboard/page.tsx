@@ -88,7 +88,6 @@ export default function UserDashboardPage() {
   return (
     <ProtectedRoute>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-6">
-        {/* Page Title */}
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Account Overview
@@ -98,9 +97,7 @@ export default function UserDashboardPage() {
           </p>
         </div>
 
-        {/* User Profile Card */}
         <div className="bg-white rounded-2xl border border-slate-200 border-t-4 border-t-blue-600 p-8 shadow-sm space-y-8">
-          {/* Header Info */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl font-bold uppercase shadow-xs">
@@ -149,9 +146,7 @@ export default function UserDashboardPage() {
             </div>
           </div>
 
-          {/* User Details Grid with Vibrant Accents */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Tile 1: Sky Blue */}
             <div className="p-5 rounded-2xl bg-sky-50/70 border border-sky-200/80 space-y-2">
               <div className="flex items-center gap-2 text-sky-700">
                 <div className="w-7 h-7 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center">
@@ -164,7 +159,6 @@ export default function UserDashboardPage() {
               <p className="text-lg font-bold text-slate-900">{user?.username}</p>
             </div>
 
-            {/* Tile 2: Indigo */}
             <div className="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-2">
               <div className="flex items-center gap-2 text-indigo-700">
                 <div className="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
@@ -177,7 +171,6 @@ export default function UserDashboardPage() {
               <p className="text-lg font-bold text-slate-900">{user?.email}</p>
             </div>
 
-            {/* Tile 3: Violet */}
             <div className="p-5 rounded-2xl bg-purple-50/70 border border-purple-200/80 space-y-2">
               <div className="flex items-center gap-2 text-purple-700">
                 <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center">
@@ -190,7 +183,6 @@ export default function UserDashboardPage() {
               <p className="text-lg font-bold text-slate-900">#{user?.id}</p>
             </div>
 
-            {/* Tile 4: Emerald */}
             <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 space-y-2">
               <div className="flex items-center gap-2 text-emerald-700">
                 <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
@@ -206,7 +198,6 @@ export default function UserDashboardPage() {
             </div>
           </div>
 
-          {/* Action Footer */}
           <div className="pt-6 border-t border-slate-100 flex items-center justify-end">
             <button
               onClick={logout}
@@ -219,7 +210,6 @@ export default function UserDashboardPage() {
         </div>
       </div>
 
-      {/* Edit Profile Modal */}
       {isEditModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xl max-w-md w-full p-6 space-y-5">
