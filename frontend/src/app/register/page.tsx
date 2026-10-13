@@ -24,6 +24,24 @@ export default function RegisterPage() {
     e.preventDefault();
     setErrorMessage(null);
 
+    const cleanUsername = username.trim();
+    const cleanEmail = email.trim();
+
+    if (!cleanUsername || cleanUsername.length < 3 || cleanUsername.length > 50) {
+      setErrorMessage("Username must be between 3 and 50 characters.");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9._-]+$/.test(cleanUsername)) {
+      setErrorMessage("Username can only contain alphanumeric characters, dots, underscores, and hyphens.");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
       return;

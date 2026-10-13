@@ -50,8 +50,21 @@ export default function UserDashboardPage() {
     e.preventDefault();
     setEditError(null);
 
-    if (!editUsername.trim() || !editEmail.trim()) {
-      setEditError("Username and email are required.");
+    const cleanUsername = editUsername.trim();
+    const cleanEmail = editEmail.trim();
+
+    if (!cleanUsername || cleanUsername.length < 3 || cleanUsername.length > 50) {
+      setEditError("Username must be between 3 and 50 characters.");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9._-]+$/.test(cleanUsername)) {
+      setEditError("Username can only contain alphanumeric characters, dots, underscores, and hyphens.");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      setEditError("Please enter a valid email address.");
       return;
     }
 

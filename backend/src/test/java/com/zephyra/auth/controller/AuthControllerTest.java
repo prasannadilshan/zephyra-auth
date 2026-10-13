@@ -134,4 +134,32 @@ class AuthControllerTest {
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.error", is("Forbidden")));
     }
+
+    @Test
+    @Order(7)
+    void testRegisterXssPayloadRejected() throws Exception {
+        RegisterRequest xssRequest = RegisterRequest.builder()
+                .username("<script>alert(1)</script>")
+                .email("xss@zephyra.com")
+                .password("Password@123")
+                .roles(Set.of("user"))
+                .build();
+
+        mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(xssRequest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.validationErrors.username", notNullValue()));
+    }
+
+    @Test
+    @Order(8)
+    void testSecurityHeadersPresent() throws Exception {
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get("/api/health"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("X-Content-Type-Options", "nosniff"))
+                .andExpect(header().string("X-Frame-Options", "SAMEORIGIN"))
+                .andExpect(header().exists("Content-Security-Policy"))
+                .andExpect(header().string("X-XSS-Protection", "1; mode=block"));
+    }
 }
