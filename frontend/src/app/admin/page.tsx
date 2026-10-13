@@ -270,8 +270,8 @@ export default function AdminPortalPage() {
                         <td className="py-4 px-6 font-semibold text-slate-900 flex items-center gap-3">
                           <div className={`w-8 h-8 rounded-full text-white flex items-center justify-center text-xs font-semibold uppercase shadow-xs ${
                             hasAdmin
-                              ? "bg-gradient-to-tr from-purple-600 to-indigo-600"
-                              : "bg-gradient-to-tr from-blue-600 to-cyan-600"
+                              ? "bg-purple-600"
+                              : "bg-blue-600"
                           }`}>
                             {u.username.charAt(0)}
                           </div>
