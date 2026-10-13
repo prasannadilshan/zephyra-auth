@@ -18,4 +18,5 @@ public class UserProfileResponse {
     private List<String> roles;
     private boolean enabled;
     private Instant createdAt;
+    private String accessToken;
 }

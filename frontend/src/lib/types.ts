@@ -5,6 +5,7 @@ export interface User {
   roles: string[];
   enabled: boolean;
   createdAt: string;
+  accessToken?: string;
 }
 
 export interface AuthResponse {
